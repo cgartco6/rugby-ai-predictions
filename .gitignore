@@ -1,0 +1,25 @@
+# Data
+data/raw/*
+data/processed/*
+data/models/*
+
+# Environment
+.env
+.venv/
+env/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# Secrets
+config/api_keys.yaml
