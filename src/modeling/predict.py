@@ -1,5 +1,10 @@
+# src/modeling/predict.py
 import joblib
 import numpy as np
+from feature_engineering.feature_pipeline import FeatureBuilder  # Fixed import
+from utils.logger import get_logger
+
+logger = get_logger(__name__)
 
 class PredictionEngine:
     def __init__(self):
@@ -9,6 +14,8 @@ class PredictionEngine:
             'btts': joblib.load('data/models/btts_model.pkl')
         }
         self.feature_builder = FeatureBuilder()
+    
+    # Rest of the code remains the same...
     
     def predict(self, match):
         # Build feature vector
