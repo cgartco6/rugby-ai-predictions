@@ -1,3 +1,4 @@
+# .github/workflows/data-pipeline-daily.yml
 name: Daily Data Pipeline
 on:
   schedule:
@@ -26,8 +27,8 @@ jobs:
         pip install -r requirements.txt
         
     - name: Run Daily Data Pipeline
-      run: python src/data_collection/update_daily.py
-      
+      run: python -m src.data_collection.update_daily  # Fixed execution
+        
     - name: Archive processed data
       uses: actions/upload-artifact@v3
       with:
