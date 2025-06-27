@@ -1,14 +1,13 @@
-# Data
-data/raw/*
-data/processed/*
-data/models/*
-
-# Environment
+# Environment files
 .env
-.venv/
-env/
+*.env.local
 
-# Python
+# Data files
+data/raw/**
+data/processed/**
+data/models/**
+
+# Python artifacts
 __pycache__/
 *.pyc
 *.pyo
@@ -16,10 +15,11 @@ __pycache__/
 
 # Jupyter
 .ipynb_checkpoints/
+*.ipynb
 
 # IDE
 .vscode/
 .idea/
 
 # Secrets
-config/api_keys.yaml
+config/secrets.yaml
