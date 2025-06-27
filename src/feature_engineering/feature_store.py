@@ -1,9 +1,12 @@
+# src/feature_engineering/feature_store.py
 import pandas as pd
 from pathlib import Path
-from .feature_pipeline import create_feature_vector
-from utils.logger import get_logger
+from .feature_pipeline import create_feature_vector  # Fixed import
+from utils.logger import get_logger  # Fixed import
 
 logger = get_logger(__name__)
+
+# Rest of the code remains the same...
 
 FEATURE_STORE_PATH = Path('data/processed/features')
 
