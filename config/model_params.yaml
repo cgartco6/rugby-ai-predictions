@@ -1,0 +1,21 @@
+outcome_model:
+  type: xgboost
+  params:
+    max_depth: 8
+    n_estimators: 500
+    learning_rate: 0.05
+    objective: multi:softprob
+
+score_model:
+  type: neural_network
+  layers: [128, 64]
+  activation: relu
+  epochs: 100
+
+feature_engineering:
+  categorical_features: ['venue_type', 'referee']
+  numerical_features: 
+    - home_win_rate
+    - away_win_rate
+    - avg_points_diff
+    - injury_impact
