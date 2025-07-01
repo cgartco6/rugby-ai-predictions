@@ -1,0 +1,88 @@
+name: Rugby Prediction Workflow
+on:
+  schedule:
+    - cron: '0 18 * * 4'  # Thursday 6 PM UTC (8 PM SAST, 7 PM BST)
+    - cron: '0 18 * * 5'  # Friday 6 PM UTC
+  workflow_dispatch:       # Allow manual triggering
+
+jobs:
+  run-predictions:
+    runs-on: ubuntu-latest
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      SPORTSDAR_API_KEY: ${{ secrets.SPORTSDAR_API_KEY }}
+      WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+      PYTHONPATH: ${{ github.workspace }}/src
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Create data directories
+      run: |
+        mkdir -p data/processed/predictions
+        mkdir -p logs
+        
+    - name: Download latest processed data
+      uses: actions/download-artifact@v3
+      with:
+        name: processed-data
+        path: data/processed/
+        
+    - name: Run Prediction Pipeline
+      run: python -m src.main
+      
+    - name: Archive prediction results
+      uses: actions/upload-artifact@v3
+      with:
+        name: prediction-results-${{ github.run_id }}
+        path: |
+          data/processed/predictions/
+          logs/
+        retention-days: 7
+        
+    - name: Send to Telegram
+      if: ${{ success() }}
+      run: |
+        # Telegram sending is handled within the Python script
+        echo "Predictions sent to Telegram via script"
+        
+    - name: Send success notification
+      if: ${{ success() }}
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_COLOR: good
+        SLACK_TITLE: "Prediction Success"
+        SLACK_MESSAGE: "Rugby predictions generated and sent\nRun: ${{ github.run_id }}\nMatches: ${{ steps.prediction.outputs.match_count }}"
+        
+    - name: Send failure notification
+      if: ${{ failure() }}
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_COLOR: danger
+        SLACK_TITLE: "Prediction Failed"
+        SLACK_MESSAGE: "Rugby prediction pipeline failed\nRun: ${{ github.run_id }}\nJob: ${{ github.job }}"
+        
+    - name: Upload results to storage
+      if: ${{ success() }}
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.SSH_PORT || 22 }}
+        source: "data/processed/predictions/*"
+        target: "/var/www/rugby-predictions/"
