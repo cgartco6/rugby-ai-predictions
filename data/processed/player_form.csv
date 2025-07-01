@@ -1,0 +1,103 @@
+import pandas as pd
+player_form = pd.read_csv('data/processed/player_form.csv')
+
+  # Top performers by position
+positions = df['position'].unique()
+top_players = {}
+
+for pos in positions:
+    top = df[df['position'] == pos].nlargest(3, 'form_rating')
+    top_players[pos] = top[['player_name', 'team_name', 'form_rating']].values.tolist()
+
+def replacement_impact(starter_id, replacement_id):
+    starter = df[df['player_id'] == starter_id].iloc[0]
+    replacement = df[df['player_id'] == replacement_id].iloc[0]
+    
+    # Calculate performance differential
+    diff = starter['form_rating'] - replacement['form_rating']
+    
+    # Position importance multiplier
+    importance = {
+        'Fly-half': 1.3, 'Scrum-half': 1.2, 
+        'Hooker': 1.1, 'Prop': 1.0,
+        'Lock': 1.0, 'Flanker': 1.1,
+        'Number 8': 1.1, 'Centre': 1.05,
+        'Wing': 1.0, 'Fullback': 1.05
+    }
+    
+    return diff * importance.get(starter['position'], 1.0)
+
+# Example: Dupont (9.2) replaced by Lucu (8.0)
+impact = replacement_impact('sr:player:1001', 'sr:player:2001')
+# (9.2 - 8.0) * 1.2 = 1.44 impact points
+
+def player_influence_score(player):
+    # Position-specific weights
+    weights = {
+        'Fly-half': {'tries': 0.8, 'assists': 1.2, 'points_scored': 1.1},
+        'Scrum-half': {'assists': 1.3, 'clean_breaks': 1.1},
+        'Lock': {'tackles_made': 1.2, 'lineouts_won': 1.3},
+        'Prop': {'scrums_won': 1.5, 'tackles_made': 1.1}
+    }
+    
+    pos = player['position']
+    weight = weights.get(pos, {})
+    
+    score = 0
+    for metric, w in weight.items():
+        score += player[metric] * w
+        
+    return score / player['matches_played']
+
+# Example: Antoine Dupont influence
+# assists*1.3 + clean_breaks*1.1 = 7*1.3 + 14*1.1 = 9.1 + 15.4 = 24.5 / 5 = 4.9
+
+  def calculate_team_form(team_id):
+    players = df[df['team_id'] == team_id]
+    key_players = players.nlargest(15, 'form_rating')  # Matchday squad size
+    return key_players['form_rating'].mean()
+
+# Example: New Zealand team form
+nz_form = calculate_team_form('sr:competitor:1234')
+# Average of top 15 players ≈ 8.9
+
+  def calculate_position_impact(team_id, position):
+    players = df[(df['team_id'] == team_id) & (df['position'] == position)]
+    if players.empty:
+        return 0
+    
+    # Weighted average by minutes played
+    total_minutes = players['minutes_played'].sum()
+    impact = sum(players['form_rating'] * players['minutes_played']) / total_minutes
+    return impact
+
+# Example: Ireland's back row impact
+impact = calculate_position_impact('sr:competitor:3344', 'Flanker')
+# (9.0*480 for van der Flier) / 480 = 9.0
+
+player_id,player_name,team_id,position,matches_played,minutes_played,points_scored,tries,assists,conversions,penalties,drop_goals,metres_gained,carries,clean_breaks,defenders_beaten,tackles_made,tackles_missed,tackle_success_rate,lineouts_won,lineouts_stolen,scrums_won,penalties_conceded,yellow_cards,red_cards,form_rating,last_5_avg_rating,consistency
+sr:player:1001,Antoine Dupont,sr:competitor:5566,Scrum-half,5,400,35,3,7,4,5,1,487,68,14,28,42,6,87.5,0,0,0,4,1,0,9.2,9.1,0.95
+sr:player:1002,Johnny Sexton,sr:competitor:3344,Fly-half,4,320,58,1,5,12,13,0,312,45,8,15,27,3,90.0,0,0,0,3,0,0,9.0,8.9,0.98
+sr:player:1003,Eben Etzebeth,sr:competitor:5678,Lock,6,480,20,2,1,0,0,0,187,52,3,7,78,9,89.7,28,4,0,6,1,0,8.8,8.7,0.97
+sr:player:1004,Aaron Smith,sr:competitor:1234,Scrum-half,5,400,15,1,9,2,2,0,358,61,11,19,31,4,88.6,0,0,0,2,0,0,8.9,8.8,0.96
+sr:player:1005,Maro Itoje,sr:competitor:1122,Lock,5,400,10,0,3,0,0,0,203,47,4,9,67,7,90.5,23,3,0,7,1,0,8.7,8.6,0.95
+sr:player:1006,Pieter-Steph du Toit,sr:competitor:5678,Flanker,6,480,25,3,2,0,0,0,289,51,7,14,89,12,88.1,5,1,0,5,0,0,8.9,8.8,0.96
+sr:player:1007,Beauden Barrett,sr:competitor:1234,Fly-half,5,400,48,2,8,10,6,0,423,73,13,27,19,5,79.2,0,0,0,3,0,0,9.1,9.0,0.97
+sr:player:1008,Siya Kolisi,sr:competitor:5678,Flanker,5,400,15,1,4,0,0,0,256,49,6,11,74,8,90.2,3,1,0,4,0,0,8.8,8.7,0.96
+sr:player:1009,Garry Ringrose,sr:competitor:3344,Centre,6,480,30,4,6,0,0,0,512,82,16,31,38,7,84.4,0,0,0,2,0,0,9.0,8.9,0.97
+sr:player:1010,Tadhg Furlong,sr:competitor:3344,Prop,5,350,5,0,1,0,0,0,87,28,1,3,52,4,92.9,0,0,15,5,0,0,8.6,8.5,0.98
+sr:player:1011,Michael Hooper,sr:competitor:2468,Flanker,4,320,10,1,2,0,0,0,198,43,5,8,63,9,87.5,2,1,0,6,1,0,8.5,8.4,0.94
+sr:player:1012,Julian Montoya,sr:competitor:1357,Hooker,6,480,20,2,1,0,0,0,134,36,2,4,71,6,92.2,32,3,12,7,0,0,8.7,8.6,0.97
+sr:player:1013,Cheslin Kolbe,sr:competitor:5678,Wing,5,400,35,5,3,0,0,0,587,89,19,42,14,5,73.7,0,0,0,1,0,0,9.3,9.2,0.96
+sr:player:1014,James Lowe,sr:competitor:3344,Wing,6,480,45,7,5,0,0,0,643,94,21,37,19,6,76.0,0,0,0,2,0,0,9.4,9.3,0.97
+sr:player:1015,Dan Sheehan,sr:competitor:3344,Hooker,5,350,25,3,2,0,0,0,187,41,6,11,56,5,91.8,29,4,10,4,0,0,8.9,8.8,0.98
+sr:player:1016,Finn Russell,sr:competitor:9966,Fly-half,5,400,52,1,8,10,12,1,376,65,10,21,24,8,75.0,0,0,0,3,0,0,9.0,8.9,0.96
+sr:player:1017,Grégory Alldritt,sr:competitor:5566,Number 8,6,480,30,4,5,0,0,0,423,78,12,26,81,10,89.0,4,2,0,5,0,0,9.1,9.0,0.97
+sr:player:1018,Ardie Savea,sr:competitor:1234,Number 8,5,400,25,3,4,0,0,0,398,72,11,24,69,8,89.6,2,1,0,4,0,0,9.2,9.1,0.96
+sr:player:1019,Josh van der Flier,sr:competitor:3344,Flanker,6,480,20,2,3,0,0,0,287,53,8,17,92,11,89.3,3,1,0,3,0,0,9.0,8.9,0.97
+sr:player:1020,Sam Cane,sr:competitor:1234,Flanker,4,320,10,1,2,0,0,0,156,38,4,9,57,7,89.1,1,0,0,6,1,0,8.4,8.3,0.95
+sr:player:1021,Faf de Klerk,sr:competitor:5678,Scrum-half,5,400,25,2,6,3,4,0,321,58,9,18,37,5,88.1,0,0,0,4,0,0,8.7,8.6,0.96
+sr:player:1022,Luke Cowan-Dickie,sr:competitor:1122,Hooker,3,210,5,0,1,0,0,0,76,19,1,2,31,3,91.2,14,1,8,3,0,0,8.2,8.1,0.97
+sr:player:1023,Malcolm Marx,sr:competitor:5678,Hooker,5,350,30,4,2,0,0,0,187,42,6,12,45,4,91.8,26,5,11,5,0,0,8.9,8.8,0.98
+sr:player:1024,Pablo Matera,sr:competitor:1357,Flanker,6,480,15,1,3,0,0,0,243,51,5,11,83,10,89.2,4,1,0,7,1,0,8.6,8.5,0.95
+sr:player:1025,Rob Valetini,sr:competitor:2468,Number 8,4,320,10,1,2,0,0,0,213,46,4,8,62,8,88.6,1,0,0,5,0,0,8.5,8.4,0.96
