@@ -1,0 +1,102 @@
+def calculate_bias_index(row):
+    # Home win percentage above expected (50%)
+    home_win_bias = (row['home_win_percentage'] - 50) / 50
+    
+    # Penalty ratio above neutral (50%)
+    penalty_bias = (row['home_penalty_ratio'] - 50) / 50
+    
+    # Card ratio above neutral (50%)
+    card_bias = (row['home_yellow_ratio'] - 50) / 50
+    
+    # Try allowance differential
+    try_bias = (row['away_try_allow_percentage'] - row['home_try_allow_percentage']) / 100
+    
+    # Composite bias index
+    return round(home_win_bias * 0.5 + penalty_bias * 0.3 + card_bias * 0.1 + try_bias * 0.1, 2)
+
+# Example for Wayne Barnes:
+# home_win_bias = (62.4-50)/50 = 0.248
+# penalty_bias = (47.8-50)/50 = -0.044
+# card_bias = (48.3-50)/50 = -0.034
+# try_bias = (72.5-68.2)/100 = 0.043
+# bias_index = 0.248*0.5 + (-0.044)*0.3 + (-0.034)*0.1 + 0.043*0.1 = 0.12
+
+def adjust_for_referee_bias(prediction, referee_id):
+    ref = ref_df[ref_df['referee_id'] == referee_id].iloc[0]
+    
+    # Home advantage multiplier
+    home_adj = 1 + (ref['bias_index'] * 0.1)
+    
+    # Try expectation adjustment
+    home_try_adj = ref['home_try_allow_percentage'] / 70  # 70% baseline
+    away_try_adj = ref['away_try_allow_percentage'] / 70
+    
+    # Penalty expectation
+    penalty_adj = ref['avg_penalties'] / 22  # 22 penalties baseline
+    
+    return {
+        'home_score': prediction['home_score'] * home_adj * home_try_adj,
+        'away_score': prediction['away_score'] / home_adj * away_try_adj,
+        'total_penalties': penalty_adj * 22
+    }
+
+# Example: Predict 24-20 with Wayne Barnes
+adjusted = adjust_for_referee_bias({'home_score': 24, 'away_score': 20}, 'sr:referee:1001')
+# home_score: 24 * 1.012 * (68.2/70) ≈ 23.6
+# away_score: 20 / 1.012 * (72.5/70) ≈ 20.5
+
+def team_referee_history(team_id, referee_id):
+    # Get historical matches with this referee
+    matches = historical_df[
+        (historical_df['referee_id'] == referee_id) & 
+        ((historical_df['home_id'] == team_id) | 
+         (historical_df['away_id'] == team_id))
+    ]
+    
+    win_rate = len(matches[matches['winner_id'] == team_id]) / len(matches)
+    penalty_diff = matches['home_penalties'].mean() - matches['away_penalties'].mean()
+    
+    return {
+        'matches': len(matches),
+        'win_rate': win_rate,
+        'penalty_differential': penalty_diff
+    }
+
+# Example: South Africa with Jaco Peyper
+history = team_referee_history('sr:competitor:5678', 'sr:referee:1002')
+# Might return: {'matches': 8, 'win_rate': 0.75, 'penalty_differential': +2.1}
+
+def card_probability(referee_id, team_discipline_rating):
+    ref = ref_df[ref_df['referee_id'] == referee_id].iloc[0]
+    base_prob = ref['avg_yellow_cards'] / 2  # Per team probability
+    
+    # Adjust for team discipline (1-10 scale, higher=better discipline)
+    discipline_factor = (10 - team_discipline_rating) / 10
+    
+    # Referee strictness factor
+    strictness_factor = ref['strictness_index'] / 9
+    
+    return min(1.0, base_prob * discipline_factor * strictness_factor)
+
+# Example: England (discipline 6.5) with Matthew Carley (strictness 9.1)
+# base_prob = 2.6/2 = 1.3
+# discipline_factor = (10-6.5)/10 = 0.35
+# strictness_factor = 9.1/9 ≈ 1.01
+# probability = 1.3 * 0.35 * 1.01 ≈ 0.46 (46% chance of a yellow card)
+
+referee_id,referee_name,country,matches_officiated,home_win_percentage,away_win_percentage,draw_percentage,avg_penalties,home_penalty_ratio,scrum_penalty_ratio,offside_penalty_ratio,foul_play_penalty_ratio,avg_yellow_cards,avg_red_cards,home_yellow_ratio,last_warning_threshold,high_danger_zone_penalties,home_try_allow_percentage,away_try_allow_percentage,bias_index,strictness_index,consistency
+sr:referee:1001,Wayne Barnes,England,210,62.4,29.0,8.6,22.7,47.8,38.2,28.5,15.3,2.1,0.11,48.3,3.2,4.7,68.2,72.5,0.12,8.7,0.93
+sr:referee:1002,Jaco Peyper,South Africa,178,55.6,35.4,9.0,24.3,51.2,42.3,25.1,14.1,2.4,0.15,52.8,2.8,5.1,72.3,68.4,0.08,8.9,0.91
+sr:referee:1003,Nigel Owens,Wales,245,58.8,32.2,9.0,20.1,49.1,36.4,30.2,15.4,1.8,0.08,50.2,3.5,4.3,65.4,70.1,0.06,8.2,0.96
+sr:referee:1004,Mathieu Raynal,France,165,67.3,25.5,7.2,26.5,54.7,45.1,22.8,13.6,2.7,0.18,56.1,2.5,5.8,75.6,64.3,0.18,9.1,0.88
+sr:referee:1005,Ben O'Keeffe,New Zealand,142,51.8,39.4,8.8,21.4,48.9,39.8,27.4,14.9,2.0,0.10,49.5,3.0,4.1,70.2,73.8,0.04,8.4,0.92
+sr:referee:1006,Angus Gardner,Australia,128,53.1,38.3,8.6,23.7,50.3,41.2,26.5,13.2,2.3,0.13,51.7,2.7,4.9,71.5,69.8,0.05,8.8,0.90
+sr:referee:1007,Luke Pearce,England,98,59.2,32.7,8.1,25.1,52.6,43.8,24.7,14.3,2.5,0.14,53.4,2.6,5.3,73.8,67.2,0.10,9.0,0.89
+sr:referee:1008,Andrew Brace,Ireland,85,50.6,40.0,9.4,19.8,48.2,37.5,29.1,15.2,1.9,0.09,49.1,3.3,3.9,68.9,71.6,0.02,8.3,0.94
+sr:referee:1009,Nic Berry,Australia,76,54.0,37.4,8.6,22.5,49.8,40.6,26.3,14.8,2.2,0.12,50.5,2.9,4.5,70.8,70.5,0.03,8.6,0.91
+sr:referee:1010,Karl Dickson,England,63,61.8,30.2,8.0,26.8,53.9,45.7,23.1,13.5,2.6,0.16,54.8,2.4,5.6,74.3,66.1,0.15,9.2,0.87
+sr:referee:1011,Paul Williams,New Zealand,92,52.3,38.0,9.7,20.3,48.7,38.0,28.3,15.0,2.0,0.10,49.3,3.1,4.0,69.2,72.0,0.01,8.5,0.93
+sr:referee:1012,Brendon Pickerill,New Zealand,58,56.9,34.5,8.6,23.9,51.0,42.0,25.5,14.2,2.4,0.14,52.1,2.7,4.8,72.0,69.2,0.07,8.9,0.90
+sr:referee:1013,Damon Murphy,Australia,71,49.2,41.1,9.7,18.7,47.5,36.2,29.8,15.7,1.8,0.08,48.6,3.4,3.7,67.5,73.1,-0.03,8.1,0.95
+sr:referee:1014,Frank Murphy,Ireland,45,57.8,33.3,8.9,24.6,52.3,43.5,24.8,14.1,2.5,0.15,53.0,2.6,5.2,73.5,68.0,0.11,9.0,0.88
+sr:referee:1015,Matthew Carley,England,102,60.4,31.4,8.2,25.9,53.2,44.3,23.9,14.2,2.6,0.17,54.2,2.5,5.5,74.0,66.5,0.14,9.1,0.89
