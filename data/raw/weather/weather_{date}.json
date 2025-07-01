@@ -1,0 +1,236 @@
+{
+  "generated_at": "2023-10-12T09:45:22Z",
+  "source": "WeatherAPI",
+  "forecasts": [
+    {
+      "venue_id": "sr:venue:7890",
+      "venue_name": "Eden Park",
+      "city": "Auckland",
+      "country": "New Zealand",
+      "latitude": -36.8745,
+      "longitude": 174.7449,
+      "match_date": "2023-10-14",
+      "hourly_forecast": [
+        {
+          "time": "2023-10-14T14:00:00Z",
+          "temp_c": 18.5,
+          "temp_f": 65.3,
+          "condition": "Partly Cloudy",
+          "wind_kph": 15.2,
+          "wind_degree": 120,
+          "wind_dir": "ESE",
+          "humidity": 65,
+          "precip_mm": 0.0,
+          "cloud": 35,
+          "feelslike_c": 18.7,
+          "visibility_km": 10.0,
+          "gust_kph": 25.7,
+          "pitch_impact": "Good conditions for open play"
+        },
+        {
+          "time": "2023-10-14T17:00:00Z",
+          "temp_c": 17.2,
+          "temp_f": 63.0,
+          "condition": "Sunny",
+          "wind_kph": 12.8,
+          "wind_degree": 110,
+          "wind_dir": "ESE",
+          "humidity": 70,
+          "precip_mm": 0.0,
+          "cloud": 15,
+          "feelslike_c": 17.0,
+          "visibility_km": 10.0,
+          "gust_kph": 20.4,
+          "pitch_impact": "Ideal rugby conditions"
+        }
+      ],
+      "match_impact_summary": "Excellent conditions - dry pitch, moderate wind. Favors running rugby."
+    },
+    {
+      "venue_id": "sr:venue:7891",
+      "venue_name": "Suncorp Stadium",
+      "city": "Brisbane",
+      "country": "Australia",
+      "latitude": -27.4658,
+      "longitude": 153.0235,
+      "match_date": "2023-10-14",
+      "hourly_forecast": [
+        {
+          "time": "2023-10-14T06:00:00Z",
+          "temp_c": 25.8,
+          "temp_f": 78.4,
+          "condition": "Moderate Rain",
+          "wind_kph": 18.3,
+          "wind_degree": 85,
+          "wind_dir": "E",
+          "humidity": 85,
+          "precip_mm": 4.2,
+          "cloud": 90,
+          "feelslike_c": 28.3,
+          "visibility_km": 6.0,
+          "gust_kph": 30.5,
+          "pitch_impact": "Slippery conditions, handling errors likely"
+        },
+        {
+          "time": "2023-10-14T09:00:00Z",
+          "temp_c": 27.5,
+          "temp_f": 81.5,
+          "condition": "Light Rain",
+          "wind_kph": 15.7,
+          "wind_degree": 80,
+          "wind_dir": "E",
+          "humidity": 80,
+          "precip_mm": 1.8,
+          "cloud": 80,
+          "feelslike_c": 30.2,
+          "visibility_km": 8.0,
+          "gust_kph": 25.9,
+          "pitch_impact": "Humid conditions may fatigue players faster"
+        }
+      ],
+      "match_impact_summary": "Wet conditions expected - favors forward-dominated play, kicking strategy"
+    },
+    {
+      "venue_id": "sr:venue:7892",
+      "venue_name": "Twickenham Stadium",
+      "city": "London",
+      "country": "England",
+      "latitude": 51.4560,
+      "longitude": -0.3410,
+      "match_date": "2023-10-15",
+      "hourly_forecast": [
+        {
+          "time": "2023-10-15T13:00:00Z",
+          "temp_c": 10.2,
+          "temp_f": 50.4,
+          "condition": "Overcast",
+          "wind_kph": 20.5,
+          "wind_degree": 240,
+          "wind_dir": "WSW",
+          "humidity": 75,
+          "precip_mm": 0.2,
+          "cloud": 95,
+          "feelslike_c": 7.5,
+          "visibility_km": 9.0,
+          "gust_kph": 35.8,
+          "pitch_impact": "Heavy pitch, difficult for running rugby"
+        },
+        {
+          "time": "2023-10-15T16:00:00Z",
+          "temp_c": 9.8,
+          "temp_f": 49.6,
+          "condition": "Light Rain",
+          "wind_kph": 22.7,
+          "wind_degree": 250,
+          "wind_dir": "WSW",
+          "humidity": 80,
+          "precip_mm": 1.5,
+          "cloud": 100,
+          "feelslike_c": 6.0,
+          "visibility_km": 7.0,
+          "gust_kph": 40.2,
+          "pitch_impact": "Wet and windy - kicking game advantage"
+        }
+      ],
+      "match_impact_summary": "Cold, wet and windy - significant impact on backline play, kicking accuracy crucial"
+    },
+    {
+      "venue_id": "sr:venue:7893",
+      "venue_name": "Stade de France",
+      "city": "Saint-Denis",
+      "country": "France",
+      "latitude": 48.9245,
+      "longitude": 2.3602,
+      "match_date": "2023-10-15",
+      "hourly_forecast": [
+        {
+          "time": "2023-10-15T15:00:00Z",
+          "temp_c": 12.5,
+          "temp_f": 54.5,
+          "condition": "Cloudy",
+          "wind_kph": 12.3,
+          "wind_degree": 180,
+          "wind_dir": "S",
+          "humidity": 70,
+          "precip_mm": 0.0,
+          "cloud": 65,
+          "feelslike_c": 11.0,
+          "visibility_km": 10.0,
+          "gust_kph": 18.9,
+          "pitch_impact": "Good hybrid surface conditions"
+        },
+        {
+          "time": "2023-10-15T18:00:00Z",
+          "temp_c": 11.8,
+          "temp_f": 53.2,
+          "condition": "Clear",
+          "wind_kph": 10.5,
+          "wind_degree": 170,
+          "wind_dir": "S",
+          "humidity": 75,
+          "precip_mm": 0.0,
+          "cloud": 20,
+          "feelslike_c": 10.5,
+          "visibility_km": 10.0,
+          "gust_kph": 15.7,
+          "pitch_impact": "Cool evening, dew may affect handling"
+        }
+      ],
+      "match_impact_summary": "Mild conditions - minimal weather impact expected"
+    },
+    {
+      "venue_id": "sr:venue:7894",
+      "venue_name": "RDS Arena",
+      "city": "Dublin",
+      "country": "Ireland",
+      "latitude": 53.3260,
+      "longitude": -6.2280,
+      "match_date": "2023-10-14",
+      "hourly_forecast": [
+        {
+          "time": "2023-10-14T19:00:00Z",
+          "temp_c": 8.5,
+          "temp_f": 47.3,
+          "condition": "Heavy Rain",
+          "wind_kph": 30.2,
+          "wind_degree": 280,
+          "wind_dir": "W",
+          "humidity": 90,
+          "precip_mm": 8.7,
+          "cloud": 100,
+          "feelslike_c": 3.2,
+          "visibility_km": 4.0,
+          "gust_kph": 50.6,
+          "pitch_impact": "Extremely challenging conditions - handling errors guaranteed"
+        },
+        {
+          "time": "2023-10-14T22:00:00Z",
+          "temp_c": 7.8,
+          "temp_f": 46.0,
+          "condition": "Moderate Rain",
+          "wind_kph": 28.7,
+          "wind_degree": 270,
+          "wind_dir": "W",
+          "humidity": 92,
+          "precip_mm": 5.2,
+          "cloud": 100,
+          "feelslike_c": 2.5,
+          "visibility_km": 5.0,
+          "gust_kph": 45.3,
+          "pitch_impact": "Poor visibility and slippery ball - set piece dominance critical"
+        }
+      ],
+      "match_impact_summary": "Severe weather warning - heavy rain and strong winds will dramatically affect gameplay"
+    }
+  ],
+  "weather_impact_analysis": {
+    "most_affected_match": "Leinster vs Stormers at RDS Arena",
+    "least_affected_match": "France vs Wales at Stade de France",
+    "key_considerations": [
+      "Kicking accuracy significantly reduced in windy conditions",
+      "Wet pitches favor forward-dominated strategies",
+      "High humidity in Brisbane may impact player endurance",
+      "Cold temperatures in London/Dublin increase injury risk"
+    ]
+  }
+}
