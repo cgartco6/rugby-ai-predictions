@@ -1,0 +1,193 @@
+{
+  "generated_at": "2023-10-12T08:30:15Z",
+  "source": "Multiple sources including RugbyPass, PlanetRugby, and team reports",
+  "injuries": [
+    {
+      "player": {
+        "id": "sr:player:12345",
+        "name": "Handré Pollard",
+        "position": "Fly-half",
+        "team_id": "sr:competitor:5678",
+        "team_name": "South Africa"
+      },
+      "injury": {
+        "type": "Calf strain",
+        "severity": "Grade 2",
+        "status": "Ruled out",
+        "date_sustained": "2023-10-05",
+        "expected_recovery": "4-6 weeks"
+      },
+      "impact": {
+        "team_importance": "Critical",
+        "replacement": "Manie Libbok",
+        "replacement_experience": "12 caps"
+      },
+      "source": {
+        "name": "SA Rugby Magazine",
+        "url": "https://www.sarugbymag.co.za/pollard-ruled-out",
+        "date_published": "2023-10-10"
+      }
+    },
+    {
+      "player": {
+        "id": "sr:player:67890",
+        "name": "Maro Itoje",
+        "position": "Lock",
+        "team_id": "sr:competitor:1122",
+        "team_name": "England"
+      },
+      "injury": {
+        "type": "Shoulder dislocation",
+        "severity": "Moderate",
+        "status": "Doubtful",
+        "date_sustained": "2023-10-08",
+        "expected_recovery": "2-3 weeks"
+      },
+      "impact": {
+        "team_importance": "High",
+        "replacement": "Ollie Chessum",
+        "replacement_experience": "15 caps"
+      },
+      "source": {
+        "name": "BBC Sport",
+        "url": "https://www.bbc.com/sport/rugby/itoje-injury",
+        "date_published": "2023-10-11"
+      }
+    },
+    {
+      "player": {
+        "id": "sr:player:54321",
+        "name": "Aaron Smith",
+        "position": "Scrum-half",
+        "team_id": "sr:competitor:1234",
+        "team_name": "New Zealand"
+      },
+      "injury": {
+        "type": "Concussion",
+        "severity": "Mild",
+        "status": "Returning to training",
+        "date_sustained": "2023-10-01",
+        "expected_recovery": "Cleared to play"
+      },
+      "impact": {
+        "team_importance": "Medium",
+        "replacement": "Finlay Christie",
+        "replacement_experience": "20 caps"
+      },
+      "source": {
+        "name": "NZ Herald",
+        "url": "https://www.nzherald.co.nz/smith-concussion-update",
+        "date_published": "2023-10-12"
+      }
+    },
+    {
+      "player": {
+        "id": "sr:player:98765",
+        "name": "Johnny Sexton",
+        "position": "Fly-half",
+        "team_id": "sr:competitor:3344",
+        "team_name": "Ireland"
+      },
+      "injury": {
+        "type": "Groin strain",
+        "severity": "Minor",
+        "status": "50/50 availability",
+        "date_sustained": "2023-10-07",
+        "expected_recovery": "Match day decision"
+      },
+      "impact": {
+        "team_importance": "Critical",
+        "replacement": "Jack Crowley",
+        "replacement_experience": "5 caps"
+      },
+      "source": {
+        "name": "Irish Independent",
+        "url": "https://www.independent.ie/sport/sexton-fitness-race",
+        "date_published": "2023-10-11"
+      }
+    },
+    {
+      "player": {
+        "id": "sr:player:11223",
+        "name": "Cheslin Kolbe",
+        "position": "Wing",
+        "team_id": "sr:competitor:5678",
+        "team_name": "South Africa"
+      },
+      "injury": {
+        "type": "Hamstring tear",
+        "severity": "Grade 1",
+        "status": "Likely available",
+        "date_sustained": "2023-10-03",
+        "expected_recovery": "Training fully"
+      },
+      "impact": {
+        "team_importance": "High",
+        "replacement": "Kurt-Lee Arendse",
+        "replacement_experience": "12 caps"
+      },
+      "source": {
+        "name": "SuperSport",
+        "url": "https://supersport.com/rugby/kolbe-update",
+        "date_published": "2023-10-12"
+      }
+    },
+    {
+      "player": {
+        "id": "sr:player:33445",
+        "name": "Antoine Dupont",
+        "position": "Scrum-half",
+        "team_id": "sr:competitor:5566",
+        "team_name": "France"
+      },
+      "injury": {
+        "type": "Facial fracture",
+        "severity": "Surgery required",
+        "status": "Out for 6 weeks",
+        "date_sustained": "2023-10-02",
+        "expected_recovery": "Mid-November"
+      },
+      "impact": {
+        "team_importance": "Critical",
+        "replacement": "Maxime Lucu",
+        "replacement_experience": "18 caps"
+      },
+      "source": {
+        "name": "L'Équipe",
+        "url": "https://www.lequipe.fr/rugby/dupont-fracture",
+        "date_published": "2023-10-03"
+      }
+    },
+    {
+      "player": {
+        "id": "sr:player:55667",
+        "name": "Eben Etzebeth",
+        "position": "Lock",
+        "team_id": "sr:competitor:5678",
+        "team_name": "South Africa"
+      },
+      "injury": {
+        "type": "Shoulder AC joint",
+        "severity": "Grade 2",
+        "status": "Probable",
+        "date_sustained": "2023-10-06",
+        "expected_recovery": "Playing through pain"
+      },
+      "impact": {
+        "team_importance": "Critical",
+        "replacement": "Jean Kleyn",
+        "replacement_experience": "5 caps"
+      },
+      "source": {
+        "name": "News24",
+        "url": "https://www.news24.com/sport/etzebeth-shoulder",
+        "date_published": "2023-10-10"
+      }
+    }
+  ],
+  "summary": {
+    "critical_injuries": 3,
+    "teams_affected": ["South Africa", "England", "France", "Ireland"],
+    "key_matches_impacted": ["New Zealand vs South Africa", "England vs Ireland"]
+  }
+}
