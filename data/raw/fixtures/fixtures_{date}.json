@@ -1,0 +1,178 @@
+{
+  "generated_at": "2023-10-12T03:15:42Z",
+  "schema": "https://api.sportradar.com/rugby/trial/v3/en/schedules/{date}/schedule.json",
+  "fixtures": [
+    {
+      "id": "sr:match:12345678",
+      "scheduled": "2023-10-14T14:00:00Z",
+      "status": "scheduled",
+      "tournament": {
+        "id": "sr:tournament:987",
+        "name": "Rugby Championship",
+        "category": "International"
+      },
+      "home": {
+        "id": "sr:competitor:1234",
+        "name": "New Zealand",
+        "country": "New Zealand",
+        "country_code": "NZL",
+        "qualifier": "home"
+      },
+      "away": {
+        "id": "sr:competitor:5678",
+        "name": "South Africa",
+        "country": "South Africa",
+        "country_code": "ZAF",
+        "qualifier": "away"
+      },
+      "venue": {
+        "id": "sr:venue:7890",
+        "name": "Eden Park",
+        "city": "Auckland",
+        "country": "New Zealand",
+        "country_code": "NZL",
+        "capacity": 50000,
+        "surface": "grass"
+      },
+      "broadcasters": [
+        {
+          "name": "Sky Sports",
+          "country": "United Kingdom",
+          "country_code": "GBR"
+        }
+      ]
+    },
+    {
+      "id": "sr:match:12345679",
+      "scheduled": "2023-10-14T16:30:00Z",
+      "status": "scheduled",
+      "tournament": {
+        "id": "sr:tournament:987",
+        "name": "Rugby Championship",
+        "category": "International"
+      },
+      "home": {
+        "id": "sr:competitor:2468",
+        "name": "Australia",
+        "country": "Australia",
+        "country_code": "AUS",
+        "qualifier": "home"
+      },
+      "away": {
+        "id": "sr:competitor:1357",
+        "name": "Argentina",
+        "country": "Argentina",
+        "country_code": "ARG",
+        "qualifier": "away"
+      },
+      "venue": {
+        "id": "sr:venue:7891",
+        "name": "Suncorp Stadium",
+        "city": "Brisbane",
+        "country": "Australia",
+        "country_code": "AUS",
+        "capacity": 52500,
+        "surface": "grass"
+      }
+    },
+    {
+      "id": "sr:match:12345680",
+      "scheduled": "2023-10-15T13:00:00Z",
+      "status": "scheduled",
+      "tournament": {
+        "id": "sr:tournament:654",
+        "name": "Six Nations",
+        "category": "International"
+      },
+      "home": {
+        "id": "sr:competitor:1122",
+        "name": "England",
+        "country": "England",
+        "country_code": "ENG",
+        "qualifier": "home"
+      },
+      "away": {
+        "id": "sr:competitor:3344",
+        "name": "Ireland",
+        "country": "Ireland",
+        "country_code": "IRL",
+        "qualifier": "away"
+      },
+      "venue": {
+        "id": "sr:venue:7892",
+        "name": "Twickenham Stadium",
+        "city": "London",
+        "country": "England",
+        "country_code": "GBR",
+        "capacity": 82000,
+        "surface": "grass"
+      }
+    },
+    {
+      "id": "sr:match:12345681",
+      "scheduled": "2023-10-15T15:15:00Z",
+      "status": "scheduled",
+      "tournament": {
+        "id": "sr:tournament:654",
+        "name": "Six Nations",
+        "category": "International"
+      },
+      "home": {
+        "id": "sr:competitor:5566",
+        "name": "France",
+        "country": "France",
+        "country_code": "FRA",
+        "qualifier": "home"
+      },
+      "away": {
+        "id": "sr:competitor:7788",
+        "name": "Wales",
+        "country": "Wales",
+        "country_code": "WAL",
+        "qualifier": "away"
+      },
+      "venue": {
+        "id": "sr:venue:7893",
+        "name": "Stade de France",
+        "city": "Saint-Denis",
+        "country": "France",
+        "country_code": "FRA",
+        "capacity": 81338,
+        "surface": "hybrid"
+      }
+    },
+    {
+      "id": "sr:match:12345682",
+      "scheduled": "2023-10-14T19:45:00Z",
+      "status": "scheduled",
+      "tournament": {
+        "id": "sr:tournament:321",
+        "name": "United Rugby Championship",
+        "category": "Club"
+      },
+      "home": {
+        "id": "sr:competitor:9900",
+        "name": "Leinster",
+        "country": "Ireland",
+        "country_code": "IRL",
+        "qualifier": "home"
+      },
+      "away": {
+        "id": "sr:competitor:9911",
+        "name": "Stormers",
+        "country": "South Africa",
+        "country_code": "ZAF",
+        "qualifier": "away"
+      },
+      "venue": {
+        "id": "sr:venue:7894",
+        "name": "RDS Arena",
+        "city": "Dublin",
+        "country": "Ireland",
+        "country_code": "IRL",
+        "capacity": 18700,
+        "surface": "grass"
+      }
+    }
+  ]
+}
