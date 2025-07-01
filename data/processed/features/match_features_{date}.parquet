@@ -1,0 +1,122 @@
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.appName("RugbyPredictions").getOrCreate()
+features = spark.read.parquet("data/processed/features/*.parquet")
+
+predictions = features.select(
+    "match_id",
+    model.predict(features).alias("prediction")
+)
+
+predictions.write.parquet("data/predictions/")
+
+from evidently import ColumnMapping
+from evidently.report import Report
+from evidently.metrics import DatasetDriftMetric
+
+column_mapping = ColumnMapping(
+    prediction='prediction',
+    numerical_features=['home_attack_strength', 'form_diff', ...]
+)
+
+report = Report(metrics=[DatasetDriftMetric()])
+report.run(
+    reference=reference_features,
+    current=current_features,
+    column_mapping=column_mapping
+)
+
+from feast import FeatureStore
+
+store = FeatureStore(repo_path=".")
+features = store.get_online_features(
+    entity_rows=[{"match_id": "sr:match:123456"}],
+    features=[
+        "match_features:home_attack_strength",
+        "match_features:away_defense_strength",
+        "match_features:weather_impact"
+    ]
+).to_df()
+
+import pandas as pd
+
+# Efficient column selection
+df = pd.read_parquet(
+    'match_features_20231012.parquet',
+    columns=['match_id', 'home_team', 'away_team', 'btts_rating']
+)
+
+# Row group filtering
+df = pd.read_parquet(
+    'match_features_20231012.parquet',
+    filters=[('date', '=', '2023-10-14')]
+)
+
+File path: match_features_20231012.parquet
+Created By: parquet-cpp-arrow version 12.0.0
+Properties:
+  compression: SNAPPY
+Schema:
+  match_id: STRING
+  date: DATE
+  home_team: STRING
+  ...
+  rest_days_diff: INT16
+Row Groups: 1 (Total Bytes: 15.7 KB)
+
+import pyarrow.parquet as pq
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+
+# Load engineered features
+features = pq.read_table('data/processed/features/match_features_20231012.parquet').to_pandas()
+
+# Select prediction columns
+X = features[[
+    'home_attack_strength', 'away_defense_strength', 'form_diff', 
+    'btts_rating', 'injury_impact_home', 'weather_impact',
+    'scrum_advantage', 'backline_rating_diff', 'ref_bias_index'
+]]
+
+# Apply feature scaling
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Make predictions
+outcome_pred = outcome_model.predict_proba(X_scaled)
+btts_pred = btts_model.predict_proba(X_scaled)
+score_pred = score_model.predict(X_scaled)
+
+graph TD
+    A[Top Features] --> B[form_diff]
+    A --> C[home_advantage_factor]
+    A --> D[injury_impact_home]
+    A --> E[weather_impact]
+    A --> F[ref_bias_index]
+    A --> G[backline_rating_diff]
+    A --> H[forward_rating_diff]
+
+travel_impact = min(1.0, travel_distance_km / 10000) * jetlag_factor
+
+home_advantage_factor = 1.1 + (ref_bias_index * 0.5)
+
+weather_impact = (precip_mm * 0.05) + (wind_speed / 30) + (temp_deviation * 0.02)
+
+def calculate_injury_impact(injuries, position_weights):
+    impact = 0
+    for injury in injuries:
+        severity = injury['severity_factor']  # 0.2-1.0
+        position_impact = position_weights[injury['position']]  # Fly-half: 1.2
+        impact += severity * position_impact
+    return min(1.0, impact / 5)  # Cap at 1.0
+
+df['scrum_advantage'] = df['home_scrum_success'] - df['away_scrum_success']
+df['lineout_advantage'] = df['home_lineout_success'] - df['away_lineout_success']
+df['form_diff'] = df['home_form_points'] - df['away_form_points']
+
+match_id,date,home_team,away_team,venue,tournament,home_attack_strength,away_defense_strength,form_diff,btts_rating,injury_impact_home,injury_impact_away,ref_bias_index,weather_impact,home_win_percentage,away_win_percentage,h2h_home_wins,h2h_away_wins,scrum_advantage,lineout_advantage,discipline_diff,backline_rating_home,backline_rating_away,forward_rating_home,forward_rating_away,home_advantage_factor,pressure_index,travel_impact,rest_days_diff
+sr:match:123456,2023-10-14,New Zealand,South Africa,Eden Park,Rugby Championship,9.8,9.5,0.3,0.93,0.05,0.15,0.12,0.1,88.9,71.4,3,1,1.4,2.3,0.8,9.6,9.3,9.4,9.2,1.12,0.85,0.25,2
+sr:match:123457,2023-10-14,Australia,Argentina,Suncorp Stadium,Rugby Championship,7.2,8.1,-0.4,0.80,0.20,0.10,0.05,0.65,33.3,40.0,1,2,-1.1,-0.8,-1.3,7.8,8.2,7.0,8.0,1.05,0.75,0.15,0
+sr:match:123458,2023-10-15,England,Ireland,Twickenham,Six Nations,8.5,9.4,-1.2,0.85,0.15,0.05,-0.03,0.55,66.7,77.8,1,3,-0.9,-1.5,-0.7,8.3,9.5,8.7,9.3,1.08,0.95,0.05,3
+sr:match:123459,2023-10-15,France,Wales,Stade de France,Six Nations,9.3,7.5,2.1,0.70,0.10,0.25,0.18,0.15,85.7,33.3,4,0,3.2,4.1,2.3,9.1,7.2,9.2,7.5,1.15,0.80,0.35,1
+sr:match:123460,2023-10-14,Leinster,Stormers,RDS Arena,URC,9.9,8.8,1.5,0.90,0.05,0.10,0.04,0.85,100.0,60.0,2,1,4.4,5.3,1.8,9.8,8.5,9.7,8.6,1.18,0.65,0.40,-2
