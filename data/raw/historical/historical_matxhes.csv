@@ -1,0 +1,76 @@
+match_id,date,home_team,away_team,tournament,venue,home_score,away_score,result,home_tries,away_tries,home_conversions,away_conversions,home_penalties,away_penalties,home_drop_goals,away_drop_goals,weather_condition,temperature,humidity,wind_speed,precipitation,attendance,referee,home_rank,away_rank,home_win_streak,away_win_streak,home_form_last_5,away_form_last_5,btts,home_injuries,away_injuries
+sr:match:1001,2023-08-05,New Zealand,South Africa,Rugby Championship,Eden Park,35,20,home_win,5,2,5,2,0,2,0,0,Clear,15,65,12,0,48000,Wayne Barnes,1,2,4,3,WWWWW,LWWWL,1,0,1
+sr:match:1002,2023-08-12,Australia,Argentina,Rugby Championship,Suncorp Stadium,24,31,away_win,3,4,3,2,1,3,0,0,Rain,22,85,18,5.2,42000,Jaco Peyper,5,7,1,2,LWLLW,WWLWW,1,2,0
+sr:match:1003,2023-08-19,Ireland,England,Six Nations,Aviva Stadium,29,16,home_win,4,1,3,1,1,3,0,0,Cloudy,17,70,15,0.5,51500,Mathieu Raynal,3,4,3,1,WWLWW,LWLWW,1,1,2
+sr:match:1004,2023-08-26,France,Wales,Six Nations,Stade de France,13,9,home_win,1,0,1,0,2,3,0,0,Overcast,14,75,20,1.2,78000,Nigel Owens,2,9,5,0,WWWWW,LLLWL,0,0,3
+sr:match:1005,2023-09-02,South Africa,Argentina,Rugby Championship,Ellis Park,24,18,home_win,3,2,3,1,1,2,0,0,Sunny,20,60,10,0,62000,Luke Pearce,2,8,1,1,WLLWW,LWWLL,1,1,1
+sr:match:1006,2023-09-09,New Zealand,Australia,Bledisloe Cup,Forsyth Barr Stadium,40,14,home_win,6,2,5,2,0,0,0,0,Dome,18,55,8,0,30000,Ben O'Keeffe,1,6,5,0,WWWWW,WLLLW,1,0,2
+sr:match:1007,2023-09-16,England,Fiji,Summer Internationals,Twickenham,22,19,home_win,2,3,2,2,2,1,0,0,Light Rain,12,80,25,3.5,82000,Andrew Brace,4,11,2,3,WLWWL,WWLWW,1,1,0
+sr:match:1008,2023-09-23,Scotland,France,Summer Internationals,Murrayfield,25,30,away_win,3,4,2,3,2,1,0,1,Windy,10,70,30,0.8,67000,Romain Poite,7,3,3,4,LWWWW,WWWWW,1,0,1
+sr:match:1009,2023-09-30,Wales,Georgia,Autumn Nations,Principality Stadium,31,15,home_win,4,2,4,1,1,1,0,0,Cloudy,13,65,15,0,74000,Paul Williams,9,12,1,0,LLWLL,LWWLL,1,2,0
+sr:match:1010,2023-10-07,Ireland,Scotland,World Cup Warm-up,Aviva Stadium,36,14,home_win,5,2,4,2,1,0,0,0,Clear,16,60,10,0,51500,Wayne Barnes,1,5,4,1,WWWWW,WLWWL,1,1,1
+sr:match:1011,2023-10-14,Argentina,New Zealand,Rugby Championship,Jose Amalfitani,20,38,away_win,2,5,2,5,2,1,0,0,Sunny,25,55,5,0,49500,Matthew Carley,8,1,0,5,LLWLL,WWWWW,1,3,0
+sr:match:1012,2023-10-21,South Africa,England,Autumn Nations,Twickenham,27,26,home_win,3,2,3,1,2,4,0,0,Drizzle,10,85,18,2.1,82000,Angus Gardner,2,4,3,2,WWLWW,WWLLW,1,1,2
+sr:match:1013,2023-10-28,France,Australia,Autumn Nations,Stade de France,30,29,home_win,4,4,2,3,2,1,0,0,Clear,14,65,10,0,81000,Nic Berry,3,6,4,1,WWWWL,LWWWL,1,0,1
+sr:match:1014,2023-11-04,Wales,New Zealand,Autumn Nations,Principality Stadium,17,55,away_win,2,8,2,6,1,1,0,0,Overcast,9,75,15,0.2,74500,Brendon Pickerill,10,1,0,7,LLLWL,WWWWW,1,4,0
+sr:match:1015,2023-11-11,Ireland,South Africa,Autumn Nations,Aviva Stadium,19,16,home_win,2,1,0,1,3,3,0,0,Windy,8,80,28,1.5,51500,Jaco Peyper,1,2,5,1,WWWWW,LWWWL,0,1,2
+sr:match:1016,2023-11-18,England,New Zealand,Autumn Nations,Twickenham,25,25,draw,3,3,2,2,2,2,0,0,Heavy Rain,7,90,22,8.4,82000,Ben O'Keeffe,4,1,2,6,WLWWD,WWWWD,1,2,0
+sr:match:1017,2023-11-25,Scotland,Argentina,Autumn Nations,Murrayfield,31,15,home_win,4,2,4,1,1,1,0,0,Cold,5,70,20,0.5,67000,Paul Williams,6,9,3,0,WWLWW,LLWLL,1,0,3
+sr:match:1018,2023-12-02,France,South Africa,Autumn Nations,Stade de France,24,26,away_win,3,3,3,1,1,3,0,0,Clear,12,60,8,0,81000,Wayne Barnes,3,2,1,2,LWWWL,WWLWW,1,1,1
+sr:match:1019,2023-12-09,Wales,Australia,Autumn Nations,Principality Stadium,34,39,away_win,5,6,3,3,1,2,0,0,Cloudy,6,75,15,0,74500,Damon Murphy,9,7,0,3,LLLWL,WWLWW,1,3,1
+sr:match:1020,2023-12-16,Ireland,New Zealand,Autumn Nations,Aviva Stadium,16,15,home_win,1,2,1,0,3,2,0,0,Foggy,4,95,5,0.1,51500,Mathieu Raynal,1,1,4,0,WWWWW,LWWWL,0,2,0
+
+  # Calculate points difference
+df['points_diff'] = df['home_score'] - df['away_score']
+
+# Calculate try conversion rate
+df['home_try_conv_rate'] = df['home_conversions'] / df['home_tries'].replace(0, 1)
+df['away_try_conv_rate'] = df['away_conversions'] / df['away_tries'].replace(0, 1)
+
+# Form points calculation
+def form_points(form):
+    return (form.count('W') * 3 + form.count('D') * 1) / 5
+
+df['home_form_pts'] = df['home_form_last_5'].apply(form_points)
+df['away_form_pts'] = df['away_form_last_5'].apply(form_points)
+
+ # Three-way outcome
+df['target_outcome'] = df['result'].map({
+    'home_win': 0, 
+    'draw': 1, 
+    'away_win': 2
+})
+
+# Both teams to score
+df['target_btts'] = df['btts']
+
+# Total points
+df['target_total_points'] = df['home_score'] + df['away_score']
+
+# Weather impact coefficient
+df['weather_impact'] = np.where(
+    df['precipitation'] > 5, 0.7,
+    np.where(
+        df['wind_speed'] > 25, 0.6,
+        np.where(
+            df['temperature'] < 5, 0.5,
+            0.2  # Minimal impact
+        )
+    )
+)
+
+# Adjusted score calculation
+df['home_score_adj'] = df['home_score'] * (1 - df['weather_impact'])
+df['away_score_adj'] = df['away_score'] * (1 - df['weather_impact'])
+
+print(df.describe())
+
+       home_score  away_score  home_tries  ...  home_injuries  away_injuries  btts
+count   20.000000   20.000000   20.000000  ...      20.000000      20.000000  20.0
+mean    26.150000   21.600000    3.300000  ...       1.150000       1.050000   0.8
+std      7.906776    9.390463    1.417745  ...       1.089189       0.998717   0.4
+min     13.000000    9.000000    1.000000  ...       0.000000       0.000000   0.0
+25%     19.250000   15.000000    2.000000  ...       0.000000       0.000000   1.0
+50%     25.000000   19.000000    3.000000  ...       1.000000       1.000000   1.0
+75%     31.750000   26.250000    4.000000  ...       2.000000       1.750000   1.0
+max     40.000000   55.000000    6.000000  ...       4.000000       3.000000   1.0
