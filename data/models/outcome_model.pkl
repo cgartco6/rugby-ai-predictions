@@ -1,0 +1,56 @@
+import joblib
+import pandas as pd
+import numpy as np
+
+class OutcomeModel:
+    def __init__(self, model_path):
+        # Load the model from the pickle file
+        model_data = joblib.load(model_path)
+        self.model = model_data['model']
+        self.feature_names = model_data['feature_names']
+        self.class_names = model_data['class_names']
+        
+    def predict(self, features_df):
+        # Ensure the dataframe has the same columns as the training data
+        features_df = features_df[self.feature_names]
+        
+        # Predict probabilities and outcomes
+        probabilities = self.model.predict_proba(features_df)
+        predicted_class_indices = np.argmax(probabilities, axis=1)
+        predicted_classes = [self.class_names[idx] for idx in predicted_class_indices]
+        
+        return predicted_classes, probabilities
+
+# Example of usage
+if __name__ == "__main__":
+    # Load the model
+    model = OutcomeModel('models/outcome_model.pkl')
+    
+    # Load features for a match (example)
+    match_features = pd.DataFrame({
+        'home_attack_strength': [9.8],
+        'away_defense_strength': [9.5],
+        'form_diff': [0.3],
+        # ... all 42 features ...
+    })
+    
+    # Predict
+    outcomes, probs = model.predict(match_features)
+    print(f"Predicted outcome: {outcomes[0]}")
+    print(f"Probabilities: Home Win: {probs[0][0]:.2f}, Draw: {probs[0][1]:.2f}, Away Win: {probs[0][2]:.2f}")
+
+    {
+    'model_version': 'v3.2',
+    'training_date': '2023-10-01',
+    'feature_names': ['home_attack_strength', ...], # 42 feature names
+    'class_names': ['home_win', 'draw', 'away_win'],
+    'performance_metrics': {
+        'accuracy': 0.789,
+        'precision_macro': 0.778,
+        'recall_macro': 0.773,
+        'f1_macro': 0.775,
+        'roc_auc_ovo': 0.894
+    },
+    'model_type': 'StackingClassifier'
+}
+
