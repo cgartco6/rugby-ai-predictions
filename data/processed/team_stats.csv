@@ -1,0 +1,81 @@
+team_id,team_name,matches_played,matches_won,matches_lost,matches_drawn,win_percentage,points_for,points_against,points_difference,tries_scored,tries_conceded,try_conversion_rate,penalties_scored,drop_goals,lineout_success_rate,scrum_success_rate,turnovers_conceded,turnovers_won,penalties_conceded,yellow_cards,red_cards,home_win_percentage,away_win_percentage,btts_percentage,avg_points_scored,avg_points_conceded,last_5_form,attack_strength,defense_strength,set_piece_rating,discipline_rating
+sr:competitor:1234,New Zealand,15,12,2,1,80.0,563,289,274,76,32,85.2,45,3,91.5,96.2,122,98,65,7,0,88.9,71.4,93.3,37.5,19.3,WWWLW,9.8,9.2,9.5,8.0
+sr:competitor:5678,South Africa,15,10,4,1,66.7,452,325,127,58,39,79.3,52,2,89.2,94.8,145,132,89,12,1,77.8,57.1,86.7,30.1,21.7,LWWWL,9.2,9.5,9.3,7.2
+sr:competitor:1122,England,15,9,5,1,60.0,398,342,56,46,44,78.3,67,1,87.4,92.1,138,121,102,15,2,66.7,55.6,73.3,26.5,22.8,WLWWL,8.5,8.8,8.7,6.5
+sr:competitor:3344,Ireland,15,13,2,0,86.7,521,278,243,68,31,83.8,49,4,92.7,95.3,118,107,71,5,0,100.0,77.8,93.3,34.7,18.5,WWWWW,9.7,9.4,9.6,8.5
+sr:competitor:5566,France,15,11,3,1,73.3,486,315,171,61,38,80.3,58,2,90.1,93.7,131,119,83,8,0,85.7,66.7,86.7,32.4,21.0,WWLWW,9.3,8.9,9.1,8.1
+sr:competitor:7788,Wales,15,6,8,1,40.0,327,398,-71,38,51,73.7,51,0,84.3,89.6,156,138,112,18,3,50.0,33.3,66.7,21.8,26.5,LLLWL,7.8,7.5,7.9,5.8
+sr:competitor:9900,Leinster,20,18,2,0,90.0,682,321,361,92,39,84.8,64,6,93.5,96.8,198,184,88,6,0,100.0,85.7,90.0,34.1,16.1,WWWWW,9.9,9.8,9.9,8.9
+sr:competitor:9911,Stormers,20,14,5,1,70.0,521,398,123,67,49,80.6,72,2,88.7,92.4,175,162,105,14,1,85.7,60.0,75.0,26.1,19.9,WWLWW,9.0,8.8,8.9,7.8
+sr:competitor:2468,Australia,15,5,9,1,33.3,324,458,-134,39,60,71.8,45,0,82.1,87.3,169,142,121,21,4,33.3,33.3,60.0,21.6,30.5,LLWLL,7.2,6.8,7.0,5.2
+sr:competitor:1357,Argentina,15,7,7,1,46.7,378,396,-18,46,52,76.7,56,1,85.6,90.2,152,139,97,16,2,57.1,40.0,80.0,25.2,26.4,WLLWL,8.1,7.7,8.0,6.7
+sr:competitor:9922,Toulouse,20,16,4,0,80.0,612,378,234,78,45,82.1,66,4,91.8,94.5,183,172,95,9,0,90.0,75.0,85.0,30.6,18.9,WWWWL,9.4,9.1,9.3,8.4
+sr:competitor:9933,Crusaders,20,15,5,0,75.0,578,412,166,74,51,81.1,58,2,90.4,93.9,176,168,102,11,1,85.7,71.4,80.0,28.9,20.6,LWWWW,9.1,8.9,9.0,8.0
+sr:competitor:9944,Ulster,20,13,7,0,65.0,521,432,89,65,54,78.5,61,3,88.2,91.7,189,175,110,13,1,77.8,57.1,75.0,26.1,21.6,WWLWL,8.8,8.5,8.7,7.6
+sr:competitor:9955,Bulls,20,12,7,1,60.0,498,456,42,61,58,77.2,69,1,86.9,90.8,182,166,123,17,2,71.4,55.6,70.0,24.9,22.8,WLWWW,8.6,8.3,8.5,7.1
+sr:competitor:9966,Scotland,15,8,6,1,53.3,387,365,22,47,45,76.6,53,0,86.4,91.2,143,129,89,10,0,66.7,44.4,80.0,25.8,24.3,LWWWL,8.4,8.1,8.3,7.9
+sr:competitor:9977,Japan,15,9,6,0,60.0,412,387,25,52,49,75.4,48,2,85.7,89.3,157,142,97,12,1,75.0,50.0,86.7,27.5,25.8,WWLWW,8.7,8.0,8.3,7.5
+sr:competitor:9988,Fiji,15,7,7,1,46.7,356,398,-42,45,52,73.3,41,3,83.2,88.1,168,149,115,19,3,50.0,42.9,73.3,23.7,26.5,LWLWW,8.2,7.6,7.9,6.8
+sr:competitor:9999,Georgia,15,5,9,1,33.3,289,421,-132,34,55,70.6,47,0,81.5,86.7,179,158,128,22,4,40.0,28.6,60.0,19.3,28.1,LLLWL,7.0,6.5,6.8,5.5
+
+  # Calculate offensive efficiency
+df['offensive_efficiency'] = df['tries_scored'] / df['matches_played'] * df['try_conversion_rate']
+
+# Calculate defensive efficiency
+df['defensive_efficiency'] = (df['tries_conceded'] / df['matches_played']) * (100 - df['scrum_success_rate'])
+
+# Home advantage factor
+df['home_advantage'] = df['home_win_percentage'] - df['away_win_percentage']
+def compare_teams(home_id, away_id):
+    home = df[df['team_id'] == home_id].iloc[0]
+    away = df[df['team_id'] == away_id].iloc[0]
+    
+    return {
+        'attack_diff': home['attack_strength'] - away['attack_strength'],
+        'defense_diff': home['defense_strength'] - away['defense_strength'],
+        'set_piece_diff': home['set_piece_rating'] - away['set_piece_rating'],
+        'home_advantage': home['home_win_percentage'] / 100
+    }
+
+# Example: New Zealand vs South Africa
+comparison = compare_teams('sr:competitor:1234', 'sr:competitor:5678")
+"""
+Returns:
+{
+  'attack_diff': 0.6,  # NZ advantage
+  'defense_diff': -0.3, # SA advantage
+  'set_piece_diff': 0.2, # NZ advantage
+  'home_advantage': 0.889
+}
+"""
+
+def calculate_form_points(form_string):
+    points = {
+        'W': 3, 
+        'D': 1, 
+        'L': 0
+    }
+    return sum(points[result] for result in form_string)
+
+# Example: Ireland's form (WWWWW) = 15 points
+def calculate_btts_probability(home_team, away_team):
+    home_btts = df[df['team_id'] == home_id]['btts_percentage'].values[0] / 100
+    away_btts = df[df['team_id'] == away_id]['btts_percentage'].values[0] / 100
+    return (home_btts + away_btts) / 2
+
+# Example: Ireland vs South Africa
+btts_prob = calculate_btts_probability('sr:competitor:3344', 'sr:competitor:5678')
+# (0.933 + 0.867) / 2 = 0.90 (90% probability)
+
+# Top 5 attacking teams
+top_attack = df.sort_values('attack_strength', ascending=False).head(5)[['team_name', 'attack_strength']]
+
+# Top 5 defensive teams
+top_defense = df.sort_values('defense_strength', ascending=False).head(5)[['team_name', 'defense_strength']]
+
+# Most disciplined teams
+top_discipline = df.sort_values('discipline_rating', ascending=False).head(5)[['team_name', 'penalties_conceded', 'discipline_rating']]
+
+
+
+                           
